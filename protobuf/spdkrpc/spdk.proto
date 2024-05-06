@@ -172,6 +172,12 @@ message Engine {
     string error_msg = 14;
 }
 
+enum EntityType {
+    ENGINE_TYPE_ALL = 0;
+    ENGINE_TYPE_TARGET = 1;
+    ENGINE_TYPE_INITIATOR = 2;
+}
+
 message EngineCreateRequest {
     string name = 1;
     string volume_name = 2;
@@ -180,6 +186,8 @@ message EngineCreateRequest {
     string frontend = 5;
     int32 port_count = 6;
     bool upgrade_required = 7;
+    EntityType entity_type = 8;
+    string target_address = 9;
 }
 
 message EngineDeleteRequest {

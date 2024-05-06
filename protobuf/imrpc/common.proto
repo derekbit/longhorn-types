@@ -14,3 +14,9 @@ enum DataEngine {
     DATA_ENGINE_V1 = 0;
     DATA_ENGINE_V2 = 1;
 }
+
+enum EntityType {
+    ENGINE_TYPE_ALL = 0;
+    ENGINE_TYPE_TARGET = 1;
+    ENGINE_TYPE_INITIATOR = 2;
+}

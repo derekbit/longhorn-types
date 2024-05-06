@@ -55,6 +55,8 @@ message InstanceSpec {
 	DataEngine data_engine = 9;
 
 	bool upgrade_required = 10;
+	EntityType entity_type = 11;
+	string target_address = 12;
 }
 
 message InstanceStatus {

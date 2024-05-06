@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12imrpc/common.proto\x12\x05imrpc*$\n\x12\x42\x61\x63kendStoreDriver\x12\x06\n\x02v1\x10\x00\x12\x06\n\x02v2\x10\x01*4\n\nDataEngine\x12\x12\n\x0e\x44\x41TA_ENGINE_V1\x10\x00\x12\x12\n\x0e\x44\x41TA_ENGINE_V2\x10\x01\x42/Z-github.com/longhorn/types/pkg/generated/imrpcb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12imrpc/common.proto\x12\x05imrpc*$\n\x12\x42\x61\x63kendStoreDriver\x12\x06\n\x02v1\x10\x00\x12\x06\n\x02v2\x10\x01*4\n\nDataEngine\x12\x12\n\x0e\x44\x41TA_ENGINE_V1\x10\x00\x12\x12\n\x0e\x44\x41TA_ENGINE_V2\x10\x01*T\n\nEntityType\x12\x13\n\x0f\x45NGINE_TYPE_ALL\x10\x00\x12\x16\n\x12\x45NGINE_TYPE_TARGET\x10\x01\x12\x19\n\x15\x45NGINE_TYPE_INITIATOR\x10\x02\x42/Z-github.com/longhorn/types/pkg/generated/imrpcb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -26,4 +26,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_BACKENDSTOREDRIVER']._serialized_end=65
   _globals['_DATAENGINE']._serialized_start=67
   _globals['_DATAENGINE']._serialized_end=119
+  _globals['_ENTITYTYPE']._serialized_start=121
+  _globals['_ENTITYTYPE']._serialized_end=205
 # @@protoc_insertion_point(module_scope)
