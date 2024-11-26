@@ -44,6 +44,19 @@ message SpdkInstanceSpec {
 	bool salvage_requested = 7;
 }
 
+message NvmeDevicePath {
+    string trtype = 1;
+    string traddr = 2;
+    string trsvcid = 3;
+    string src_addr = 4;
+    string state = 5;
+}
+
+message NvmeSubsystem {
+    map<string, NvmeDevicePath> paths = 1;
+}
+
+
 message InstanceSpec {
 	// Deprecated: Replaced by `data_engine`.
 	BackendStoreDriver backend_store_driver = 1 [deprecated=true];
@@ -73,6 +86,7 @@ message InstanceStatus {
 	int32 target_port_end = 7;
 	int32 standby_target_port_start = 8;
 	int32 standby_target_port_end = 9;
+	NvmeSubsystem nvme_subsystem = 10;
 }
 
 message InstanceCreateRequest {

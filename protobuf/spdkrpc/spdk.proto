@@ -95,6 +95,18 @@ message Replica {
     string error_msg = 13;
 }
 
+message NvmeDevicePath {
+    string trtype = 1;
+    string traddr = 2;
+    string trsvcid = 3;
+    string src_addr = 4;
+    string state = 5;
+}
+
+message NvmeSubsystem {
+    map<string, NvmeDevicePath> paths = 1;
+}
+
 message ReplicaCreateRequest {
     string name = 1;
     string lvs_name = 2;
@@ -231,6 +243,7 @@ message Engine {
     string target_ip = 15;
     int32 target_port = 16;
     int32 standby_target_port = 17;
+    NvmeSubsystem nvme_subsystem = 18;
 }
 
 message EngineCreateRequest {
