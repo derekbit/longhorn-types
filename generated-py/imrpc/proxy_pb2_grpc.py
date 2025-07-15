@@ -105,6 +105,11 @@ class ProxyEngineServiceStub(object):
                 request_serializer=imrpc_dot_proxy__pb2.EngineSnapshotHashStatusRequest.SerializeToString,
                 response_deserializer=imrpc_dot_proxy__pb2.EngineSnapshotHashStatusProxyResponse.FromString,
                 )
+        self.SnapshotHashCancel = channel.unary_unary(
+                '/imrpc.ProxyEngineService/SnapshotHashCancel',
+                request_serializer=imrpc_dot_proxy__pb2.EngineSnapshotHashCancelRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.SnapshotBackup = channel.unary_unary(
                 '/imrpc.ProxyEngineService/SnapshotBackup',
                 request_serializer=imrpc_dot_proxy__pb2.EngineSnapshotBackupRequest.SerializeToString,
@@ -313,6 +318,12 @@ class ProxyEngineServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def SnapshotHashStatus(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SnapshotHashCancel(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -531,6 +542,11 @@ def add_ProxyEngineServiceServicer_to_server(servicer, server):
                     servicer.SnapshotHashStatus,
                     request_deserializer=imrpc_dot_proxy__pb2.EngineSnapshotHashStatusRequest.FromString,
                     response_serializer=imrpc_dot_proxy__pb2.EngineSnapshotHashStatusProxyResponse.SerializeToString,
+            ),
+            'SnapshotHashCancel': grpc.unary_unary_rpc_method_handler(
+                    servicer.SnapshotHashCancel,
+                    request_deserializer=imrpc_dot_proxy__pb2.EngineSnapshotHashCancelRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'SnapshotBackup': grpc.unary_unary_rpc_method_handler(
                     servicer.SnapshotBackup,
@@ -945,6 +961,23 @@ class ProxyEngineService(object):
         return grpc.experimental.unary_unary(request, target, '/imrpc.ProxyEngineService/SnapshotHashStatus',
             imrpc_dot_proxy__pb2.EngineSnapshotHashStatusRequest.SerializeToString,
             imrpc_dot_proxy__pb2.EngineSnapshotHashStatusProxyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SnapshotHashCancel(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/imrpc.ProxyEngineService/SnapshotHashCancel',
+            imrpc_dot_proxy__pb2.EngineSnapshotHashCancelRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

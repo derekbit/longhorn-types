@@ -38,6 +38,7 @@ const (
 	ProxyEngineService_SnapshotRemove_FullMethodName                     = "/imrpc.ProxyEngineService/SnapshotRemove"
 	ProxyEngineService_SnapshotHash_FullMethodName                       = "/imrpc.ProxyEngineService/SnapshotHash"
 	ProxyEngineService_SnapshotHashStatus_FullMethodName                 = "/imrpc.ProxyEngineService/SnapshotHashStatus"
+	ProxyEngineService_SnapshotHashCancel_FullMethodName                 = "/imrpc.ProxyEngineService/SnapshotHashCancel"
 	ProxyEngineService_SnapshotBackup_FullMethodName                     = "/imrpc.ProxyEngineService/SnapshotBackup"
 	ProxyEngineService_SnapshotBackupStatus_FullMethodName               = "/imrpc.ProxyEngineService/SnapshotBackupStatus"
 	ProxyEngineService_BackupRestore_FullMethodName                      = "/imrpc.ProxyEngineService/BackupRestore"
@@ -82,6 +83,7 @@ type ProxyEngineServiceClient interface {
 	SnapshotRemove(ctx context.Context, in *EngineSnapshotRemoveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SnapshotHash(ctx context.Context, in *EngineSnapshotHashRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SnapshotHashStatus(ctx context.Context, in *EngineSnapshotHashStatusRequest, opts ...grpc.CallOption) (*EngineSnapshotHashStatusProxyResponse, error)
+	SnapshotHashCancel(ctx context.Context, in *EngineSnapshotHashCancelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SnapshotBackup(ctx context.Context, in *EngineSnapshotBackupRequest, opts ...grpc.CallOption) (*EngineSnapshotBackupProxyResponse, error)
 	SnapshotBackupStatus(ctx context.Context, in *EngineSnapshotBackupStatusRequest, opts ...grpc.CallOption) (*EngineSnapshotBackupStatusProxyResponse, error)
 	BackupRestore(ctx context.Context, in *EngineBackupRestoreRequest, opts ...grpc.CallOption) (*EngineBackupRestoreProxyResponse, error)
@@ -268,6 +270,15 @@ func (c *proxyEngineServiceClient) SnapshotHash(ctx context.Context, in *EngineS
 func (c *proxyEngineServiceClient) SnapshotHashStatus(ctx context.Context, in *EngineSnapshotHashStatusRequest, opts ...grpc.CallOption) (*EngineSnapshotHashStatusProxyResponse, error) {
 	out := new(EngineSnapshotHashStatusProxyResponse)
 	err := c.cc.Invoke(ctx, ProxyEngineService_SnapshotHashStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *proxyEngineServiceClient) SnapshotHashCancel(ctx context.Context, in *EngineSnapshotHashCancelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ProxyEngineService_SnapshotHashCancel_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -499,6 +510,7 @@ type ProxyEngineServiceServer interface {
 	SnapshotRemove(context.Context, *EngineSnapshotRemoveRequest) (*emptypb.Empty, error)
 	SnapshotHash(context.Context, *EngineSnapshotHashRequest) (*emptypb.Empty, error)
 	SnapshotHashStatus(context.Context, *EngineSnapshotHashStatusRequest) (*EngineSnapshotHashStatusProxyResponse, error)
+	SnapshotHashCancel(context.Context, *EngineSnapshotHashCancelRequest) (*emptypb.Empty, error)
 	SnapshotBackup(context.Context, *EngineSnapshotBackupRequest) (*EngineSnapshotBackupProxyResponse, error)
 	SnapshotBackupStatus(context.Context, *EngineSnapshotBackupStatusRequest) (*EngineSnapshotBackupStatusProxyResponse, error)
 	BackupRestore(context.Context, *EngineBackupRestoreRequest) (*EngineBackupRestoreProxyResponse, error)
@@ -579,6 +591,9 @@ func (UnimplementedProxyEngineServiceServer) SnapshotHash(context.Context, *Engi
 }
 func (UnimplementedProxyEngineServiceServer) SnapshotHashStatus(context.Context, *EngineSnapshotHashStatusRequest) (*EngineSnapshotHashStatusProxyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SnapshotHashStatus not implemented")
+}
+func (UnimplementedProxyEngineServiceServer) SnapshotHashCancel(context.Context, *EngineSnapshotHashCancelRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SnapshotHashCancel not implemented")
 }
 func (UnimplementedProxyEngineServiceServer) SnapshotBackup(context.Context, *EngineSnapshotBackupRequest) (*EngineSnapshotBackupProxyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SnapshotBackup not implemented")
@@ -973,6 +988,24 @@ func _ProxyEngineService_SnapshotHashStatus_Handler(srv interface{}, ctx context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProxyEngineServiceServer).SnapshotHashStatus(ctx, req.(*EngineSnapshotHashStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProxyEngineService_SnapshotHashCancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EngineSnapshotHashCancelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProxyEngineServiceServer).SnapshotHashCancel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProxyEngineService_SnapshotHashCancel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProxyEngineServiceServer).SnapshotHashCancel(ctx, req.(*EngineSnapshotHashCancelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1418,6 +1451,10 @@ var ProxyEngineService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SnapshotHashStatus",
 			Handler:    _ProxyEngineService_SnapshotHashStatus_Handler,
+		},
+		{
+			MethodName: "SnapshotHashCancel",
+			Handler:    _ProxyEngineService_SnapshotHashCancel_Handler,
 		},
 		{
 			MethodName: "SnapshotBackup",
