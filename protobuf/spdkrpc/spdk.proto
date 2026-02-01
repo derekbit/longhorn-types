@@ -72,6 +72,10 @@ service SPDKService {
     rpc EngineBackupRestoreFinish(EngineBackupRestoreFinishRequest) returns (google.protobuf.Empty) {};  // Deprecated: retained for compatibility with v1.7.x and earlier versions.
     rpc EngineRestoreStatus(RestoreStatusRequest) returns (RestoreStatusResponse) {};
 
+    rpc EngineTargetCreate(EngineTargetCreateRequest) returns (EngineTarget);
+    rpc EngineTargetList(google.protobuf.Empty) returns (EngineTargetListResponse);
+    rpc EngineTargetWatch(google.protobuf.Empty) returns (stream google.protobuf.Empty) {};
+
     rpc BackingImageCreate(BackingImageCreateRequest) returns (BackingImage);
     rpc BackingImageDelete(BackingImageDeleteRequest) returns (google.protobuf.Empty);
     rpc BackingImageGet(BackingImageGetRequest) returns (BackingImage);
@@ -407,6 +411,35 @@ message EngineReplicaRebuildStatusResponse {
     string error = 5;
     string src_replica_name = 6;
     string src_replica_address = 7;
+}
+
+message EngineTarget {
+    string name = 1;
+    string volume_name = 2;
+    uint64 spec_size = 3;
+    uint64 actual_size = 4;
+    string ip = 5;
+    int32 port = 6;
+    map<string, string> replica_address_map = 7;
+    map<string, ReplicaMode> replica_mode_map = 8;
+    Lvol head = 9;
+    map<string, Lvol> snapshots = 10;
+    string state = 11;
+    string error_msg = 12;
+    string uuid = 13;
+}
+
+message EngineTargetCreateRequest {
+    string name = 1;
+    string volume_name = 2;
+    uint64 spec_size = 3;
+    map<string, string> replica_address_map = 4;
+    int32 port_count = 5;
+    bool salvage_requested = 6;
+}
+
+message EngineTargetListResponse {
+	map<string, EngineTarget> engine_targets = 1;
 }
 
 message SnapshotRequest {

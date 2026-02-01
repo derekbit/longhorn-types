@@ -325,6 +325,21 @@ class SPDKServiceStub(object):
                 request_serializer=spdkrpc_dot_spdk__pb2.RestoreStatusRequest.SerializeToString,
                 response_deserializer=spdkrpc_dot_spdk__pb2.RestoreStatusResponse.FromString,
                 )
+        self.EngineTargetCreate = channel.unary_unary(
+                '/spdkrpc.SPDKService/EngineTargetCreate',
+                request_serializer=spdkrpc_dot_spdk__pb2.EngineTargetCreateRequest.SerializeToString,
+                response_deserializer=spdkrpc_dot_spdk__pb2.EngineTarget.FromString,
+                )
+        self.EngineTargetList = channel.unary_unary(
+                '/spdkrpc.SPDKService/EngineTargetList',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=spdkrpc_dot_spdk__pb2.EngineTargetListResponse.FromString,
+                )
+        self.EngineTargetWatch = channel.unary_stream(
+                '/spdkrpc.SPDKService/EngineTargetWatch',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.BackingImageCreate = channel.unary_unary(
                 '/spdkrpc.SPDKService/BackingImageCreate',
                 request_serializer=spdkrpc_dot_spdk__pb2.BackingImageCreateRequest.SerializeToString,
@@ -787,6 +802,24 @@ class SPDKServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def EngineTargetCreate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def EngineTargetList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def EngineTargetWatch(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def BackingImageCreate(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1203,6 +1236,21 @@ def add_SPDKServiceServicer_to_server(servicer, server):
                     servicer.EngineRestoreStatus,
                     request_deserializer=spdkrpc_dot_spdk__pb2.RestoreStatusRequest.FromString,
                     response_serializer=spdkrpc_dot_spdk__pb2.RestoreStatusResponse.SerializeToString,
+            ),
+            'EngineTargetCreate': grpc.unary_unary_rpc_method_handler(
+                    servicer.EngineTargetCreate,
+                    request_deserializer=spdkrpc_dot_spdk__pb2.EngineTargetCreateRequest.FromString,
+                    response_serializer=spdkrpc_dot_spdk__pb2.EngineTarget.SerializeToString,
+            ),
+            'EngineTargetList': grpc.unary_unary_rpc_method_handler(
+                    servicer.EngineTargetList,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=spdkrpc_dot_spdk__pb2.EngineTargetListResponse.SerializeToString,
+            ),
+            'EngineTargetWatch': grpc.unary_stream_rpc_method_handler(
+                    servicer.EngineTargetWatch,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'BackingImageCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.BackingImageCreate,
@@ -2350,6 +2398,57 @@ class SPDKService(object):
         return grpc.experimental.unary_unary(request, target, '/spdkrpc.SPDKService/EngineRestoreStatus',
             spdkrpc_dot_spdk__pb2.RestoreStatusRequest.SerializeToString,
             spdkrpc_dot_spdk__pb2.RestoreStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def EngineTargetCreate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/spdkrpc.SPDKService/EngineTargetCreate',
+            spdkrpc_dot_spdk__pb2.EngineTargetCreateRequest.SerializeToString,
+            spdkrpc_dot_spdk__pb2.EngineTarget.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def EngineTargetList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/spdkrpc.SPDKService/EngineTargetList',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            spdkrpc_dot_spdk__pb2.EngineTargetListResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def EngineTargetWatch(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/spdkrpc.SPDKService/EngineTargetWatch',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
