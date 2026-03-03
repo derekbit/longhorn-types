@@ -86,6 +86,7 @@ service SPDKService {
     rpc EngineFrontendSnapshotPurge(SnapshotRequest) returns (google.protobuf.Empty);
     rpc EngineFrontendReplicaAdd(EngineFrontendReplicaAddRequest) returns (google.protobuf.Empty) {};
     rpc EngineFrontendSwitchOver(EngineFrontendSwitchOverRequest) returns (google.protobuf.Empty);
+    rpc NvmfSubsystemListenerSetAnaState(NvmfSubsystemListenerSetAnaStateRequest) returns (google.protobuf.Empty);
 
     rpc BackingImageCreate(BackingImageCreateRequest) returns (BackingImage);
     rpc BackingImageDelete(BackingImageDeleteRequest) returns (google.protobuf.Empty);
@@ -490,6 +491,13 @@ message EngineFrontendSwitchOverRequest {
     string name = 1;
     string engine_name = 2;
     string target_address = 3;
+}
+
+message NvmfSubsystemListenerSetAnaStateRequest {
+    string nqn = 1;
+    string traddr = 2;
+    int32 trsvcid = 3;
+    string ana_state = 4;
 }
 
 message SnapshotRequest {
