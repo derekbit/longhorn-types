@@ -67,6 +67,16 @@ message InstanceSpec {
 	string engine_name = 13;
 }
 
+message EngineFrontendNvmeTcpPath {
+	string address = 1;
+	string target_ip = 2;
+	int32 target_port = 3;
+	string engine_name = 4;
+	string nqn = 5;
+	string nguid = 6;
+	string ana_state = 7;
+}
+
 message InstanceStatus {
 	string state = 1;
 	string error_msg = 2;
@@ -83,6 +93,9 @@ message InstanceStatus {
 	string engine_ip = 13;
 	string endpoint = 14;
 	string frontend = 15;
+	string active_path = 16;
+	string preferred_path = 17;
+	repeated EngineFrontendNvmeTcpPath paths = 18;
 }
 
 message InstanceCreateRequest {
