@@ -52,6 +52,7 @@ service SPDKService {
     rpc EngineExpand(EngineExpandRequest) returns (google.protobuf.Empty);
     rpc EngineExpandPrecheck(EngineExpandPrecheckRequest) returns (EngineExpandPrecheckResponse);
     rpc EngineDeleteTarget(EngineDeleteTargetRequest) returns (google.protobuf.Empty);
+    rpc EngineSetTargetListenerANAState(EngineSetTargetListenerANAStateRequest) returns (google.protobuf.Empty);
     rpc EngineSnapshotCreate(SnapshotRequest) returns (SnapshotResponse);
     rpc EngineSnapshotDelete(SnapshotRequest) returns (google.protobuf.Empty);
     rpc EngineSnapshotRevert(SnapshotRequest) returns (google.protobuf.Empty);
@@ -434,6 +435,21 @@ message EngineReplicaRebuildStatusResponse {
     string src_replica_address = 7;
 }
 
+message EngineSetTargetListenerANAStateRequest {
+    string name = 1;
+    string ana_state = 2;
+}
+
+message EngineFrontendNvmeTcpPath {
+    string address = 1;
+    string target_ip = 2;
+    int32 target_port = 3;
+    string engine_name = 4;
+    string nqn = 5;
+    string nguid = 6;
+    string ana_state = 7;
+}
+
 message EngineFrontend {
     string name = 1;
     string volume_name = 2;
@@ -452,6 +468,9 @@ message EngineFrontend {
     bool is_expanding = 15;
     string last_expansion_error = 16;
     string last_expansion_failed_at = 17;
+    string active_path = 18;
+    string preferred_path = 19;
+    repeated EngineFrontendNvmeTcpPath paths = 20;
 }
 
 message EngineFrontendCreateRequest {
