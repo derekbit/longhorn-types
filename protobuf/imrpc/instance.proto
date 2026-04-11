@@ -65,6 +65,7 @@ message InstanceSpec {
 	string initiator_address = 11;
 	string target_address = 12;
 	string engine_name = 13;
+	string engine_ip = 14;
 }
 
 message EngineFrontendNvmeTcpPath {
@@ -75,6 +76,7 @@ message EngineFrontendNvmeTcpPath {
 	string nqn = 5;
 	string nguid = 6;
 	string ana_state = 7;
+	string engine_ip = 8;
 }
 
 message InstanceStatus {
@@ -163,6 +165,7 @@ message InstanceSwitchOverTargetRequest {
 	string type = 3;
 	string target_address = 4;
 	string engine_name = 5;
+	string engine_ip = 6;
 }
 
 message InstanceDeleteTargetRequest {

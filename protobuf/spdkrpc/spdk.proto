@@ -448,6 +448,7 @@ message EngineFrontendNvmeTcpPath {
     string nqn = 5;
     string nguid = 6;
     string ana_state = 7;
+    string engine_ip = 8;
 }
 
 message EngineFrontend {
@@ -482,6 +483,7 @@ message EngineFrontendCreateRequest {
     string frontend = 6;
     int32 ublk_queue_depth = 7;
     int32 ublk_number_of_queue = 8;
+    string engine_ip = 9;
 }
 
 message EngineFrontendDeleteRequest {
@@ -520,6 +522,7 @@ message EngineFrontendSwitchOverRequest {
     string name = 1;
     string engine_name = 2;
     string target_address = 3;
+    string engine_ip = 4;
 }
 
 message SnapshotRequest {
